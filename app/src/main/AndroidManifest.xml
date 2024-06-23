@@ -22,5 +22,6 @@
         </activity>
         <activity android:name=".registration_activity" />
         <activity android:name=".login_activity" />
+        <activity android:name=".main_application_screen"/>
     </application>
 </manifest>
