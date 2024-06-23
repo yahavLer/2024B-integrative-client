@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">2024B-integrative-client</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="MyCreditCards">My Credit Cards</string>
+    <string name="btn_ClubsMemberOf">ClubsMemberOf</string>
+    <string name="btn_favorite">favorite</string>
+</resources>
