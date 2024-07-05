@@ -1,4 +1,4 @@
-package com.example.a2024b_integrative_client;
+package com.example.a2024b_integrative_client.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class welcome_activity extends AppCompatActivity {
+import com.example.a2024b_integrative_client.R;
+
+public class activity_welcome extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +21,7 @@ public class welcome_activity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(welcome_activity.this, registration_activity.class);
+                Intent intent = new Intent(activity_welcome.this, activity_registration.class);
                 startActivity(intent);
             }
         });
@@ -26,7 +29,7 @@ public class welcome_activity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(welcome_activity.this, login_activity.class);
+                Intent intent = new Intent(activity_welcome.this, activity_login.class);
                 startActivity(intent);
             }
         });
