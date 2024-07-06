@@ -10,17 +10,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a2024b_integrative_client.R;
+import com.google.android.material.button.MaterialButton;
 
 public class activity_main_screen extends AppCompatActivity {
     TextView welcome_text;
     SearchView search_text;
     Button search_button;
     String userName;
-    Button navigation_home;
-    Button navigation_profile;
-    Button navigation_clubs;
-    Button navigation_credit_cards;
-
+    MaterialButton navigation_home;
+    MaterialButton navigation_profile;
+    MaterialButton navigation_clubs;
+    MaterialButton navigation_credit_cards;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,32 +35,32 @@ public class activity_main_screen extends AppCompatActivity {
         navigation_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity_main_screen.this, activity_main_screen.class);
-                startActivity(intent);
+                Intent intentHome = new Intent(activity_main_screen.this, activity_main_screen.class);
+                startActivity(intentHome);
             }
         });
 
         navigation_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity_main_screen.this, activity_profile_screen.class);
-                startActivity(intent);
+                Intent intentProfile = new Intent(activity_main_screen.this, activity_profile_screen.class);
+                startActivity(intentProfile);
             }
         });
 
         navigation_clubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity_main_screen.this, activity_clubs_screen.class);
-                startActivity(intent);
+                Intent intentClubs = new Intent(activity_main_screen.this, activity_clubs_screen.class);
+                startActivity(intentClubs);
             }
         });
 
         navigation_credit_cards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity_main_screen.this, activity_credit_cards_screen.class);
-                startActivity(intent);
+                Intent intentCards = new Intent(activity_main_screen.this, activity_credit_cards_screen.class);
+                startActivity(intentCards);
             }
         });
     }
@@ -70,8 +70,8 @@ public class activity_main_screen extends AppCompatActivity {
         search_text = findViewById(R.id.search_text);
         search_button = findViewById(R.id.search_button);
         navigation_home = findViewById(R.id.navigation_home);
-        navigation_profile = findViewById(R.id.navigation_home);
-        navigation_clubs = findViewById(R.id.navigation_home) ;
-        navigation_credit_cards = findViewById(R.id.navigation_home);
+        navigation_profile = findViewById(R.id.navigation_profile);
+        navigation_clubs = findViewById(R.id.navigation_clubs) ;
+        navigation_credit_cards = findViewById(R.id.navigation_credit_cards);
     }
 }

@@ -1,64 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:background="@color/colorPrimary">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/navigation_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_weight="1"
         android:text="Home"
         app:icon="@drawable/ic_home"
         app:iconGravity="textTop"
         android:gravity="center"
-        android:padding="8dp" />
+        android:padding="8dp"
+        app:rippleColor="@color/colorAccent"
+        android:backgroundTint="@android:color/transparent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/navigation_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintStart_toEndOf="@id/navigation_home"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_weight="1"
         android:text="Profile"
         app:icon="@drawable/ic_profile"
         app:iconGravity="textTop"
         android:gravity="center"
-        android:padding="8dp" />
+        android:padding="8dp"
+        app:rippleColor="@color/colorAccent"
+        android:backgroundTint="@android:color/transparent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/navigation_clubs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintStart_toEndOf="@id/navigation_profile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_weight="1"
         android:text="Clubs"
         app:icon="@drawable/ic_clubs"
         app:iconGravity="textTop"
         android:gravity="center"
-        android:padding="8dp" />
+        android:padding="8dp"
+        app:rippleColor="@color/colorAccent"
+        android:backgroundTint="@android:color/transparent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/navigation_credit_cards"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintStart_toEndOf="@id/navigation_clubs"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_weight="1"
         android:text="Credit Cards"
         app:icon="@drawable/ic_credit_card"
         app:iconGravity="textTop"
         android:gravity="center"
-        android:padding="8dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="8dp"
+        app:rippleColor="@color/colorAccent"
+        android:backgroundTint="@android:color/transparent" />
+</LinearLayout>

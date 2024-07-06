@@ -34,5 +34,9 @@
         <activity android:name=".view.activity_registration" />
         <activity android:name=".view.activity_login" />
         <activity android:name=".view.activity_main_screen"/>
+        <activity android:name=".view.activity_profile_screen"/>
+        <activity android:name=".view.activity_clubs_screen"/>
+        <activity android:name=".view.activity_credit_cards_screen"/>
+
     </application>
 </manifest>
