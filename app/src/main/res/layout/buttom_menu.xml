@@ -45,16 +45,4 @@
         app:rippleColor="@color/colorAccent"
         android:backgroundTint="@android:color/transparent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/navigation_credit_cards"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Credit Cards"
-        app:icon="@drawable/ic_credit_card"
-        app:iconGravity="textTop"
-        android:gravity="center"
-        android:padding="8dp"
-        app:rippleColor="@color/colorAccent"
-        android:backgroundTint="@android:color/transparent" />
 </LinearLayout>

@@ -70,6 +70,7 @@ public class activity_login extends AppCompatActivity {
         //Todo: load all the details
         CurrentUser.init(body);
         Intent intent = new Intent(this, activity_main_screen.class);
+        intent.putExtra("UserBoundary", body);
         startActivity(intent);
     }
 

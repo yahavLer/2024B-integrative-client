@@ -151,7 +151,7 @@ public class activity_registration extends AppCompatActivity {
         //TODO: check to add a delay before remove to the home page to show the success message
         CurrentUser.init(user);
         Intent intent = new Intent(activity_registration.this, activity_main_screen.class);
-        intent.putExtra("userName", user.getUsername());
+        intent.putExtra("UserBoundary", user);
         startActivity(intent);
     }
 

@@ -2,7 +2,12 @@ package com.example.a2024b_integrative_client.model.user;
 
 import com.example.a2024b_integrative_client.RoleEnumBoundary;
 
-public class UserBoundary {
+import java.io.Serializable;
+
+public class UserBoundary implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private UserId userId;
     private RoleEnumBoundary role;
     private String username;
