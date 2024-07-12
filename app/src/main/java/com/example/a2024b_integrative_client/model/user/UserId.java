@@ -1,22 +1,22 @@
 package com.example.a2024b_integrative_client.model.user;
 
 public class UserId {
-    private String superApp;
+    private String superapp;
     private String email;
 
     public UserId() {}
 
     public UserId(String superapp, String email) {
-        this.superApp = superapp;
+        this.superapp = superapp;
         this.email = email;
     }
 
     public String getSuperAPP() {
-        return superApp;
+        return superapp;
     }
 
     public void setSuperAPP(String superApp) {
-        this.superApp = superApp;
+        this.superapp = superApp;
     }
 
     public String getEmail() {
@@ -30,7 +30,7 @@ public class UserId {
     @Override
     public String toString() {
         return "UserIdBoundary{" +
-                "superapp='" + superApp + '\'' +
+                "superapp='" + superapp + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

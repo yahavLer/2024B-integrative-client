@@ -3,10 +3,10 @@ package com.example.a2024b_integrative_client.view;
 import static com.example.a2024b_integrative_client.RoleEnumBoundary.ADM_USER;
 import static com.example.a2024b_integrative_client.RoleEnumBoundary.MINIAPP_USER;
 import static com.example.a2024b_integrative_client.RoleEnumBoundary.SUPERAPP_USER;
-import static com.example.a2024b_integrative_client.RoleEnumBoundary.UNDETERMINED;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -110,8 +110,6 @@ public class activity_registration extends AppCompatActivity {
                 return SUPERAPP_USER;
             case "MINIAPP_USER":
                 return MINIAPP_USER;
-            case "UNDETERMINED":
-                return UNDETERMINED;
             default:
                 throw new IllegalArgumentException("Unknown role: " + role);
         }
@@ -119,11 +117,23 @@ public class activity_registration extends AppCompatActivity {
 
     private void createUser(String username, String email, String avatar, String phone, String role, String card, String club) {
         RoleEnumBoundary roleEnum=convertStringToEnum(role);
-        NewUserBoundary newUser = new NewUserBoundary(role, username, avatar, email);
+        NewUserBoundary newUser = new NewUserBoundary(roleEnum, username, avatar, email);
         mApi.createUser(newUser).enqueue(new Callback<UserBoundary>() {
             @Override
             public void onResponse(Call<UserBoundary> call, Response<UserBoundary> response) {
                 if (response.isSuccessful()) {
+                    if (response.body()!=null){
+                        Log.e("createUser", "Response body: " + response.body().toString());
+                        UserBoundary userBoundary = response.body();
+                        Log.e("createUser", "UserId: " + userBoundary.getUserId());
+                        Log.e("createUser", "Username: " + userBoundary.getUsername());
+                        Log.e("createUser", "Role: " + userBoundary.getRole());
+                        Log.e("createUser", "Avatar: " + userBoundary.getAvatar());
+
+                        Log.e("createUser: ", "user creat succesfully" );
+                    }else{
+                        Log.e("UserBoundrey is null: " , "");
+                    }
                     confirmNewUserUI(response.body());
                 } else {
                     My_Signal.getInstance().toast("API call failed: " + response.code());
@@ -134,6 +144,7 @@ public class activity_registration extends AppCompatActivity {
                 My_Signal.getInstance().toast("API call failed: " + t.getMessage());
             }
         });
+        Log.e("createUser: ",newUser.getUsername());
     }
 
     private void confirmNewUserUI(UserBoundary user) {

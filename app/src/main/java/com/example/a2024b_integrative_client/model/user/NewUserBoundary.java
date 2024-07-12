@@ -1,23 +1,25 @@
 package com.example.a2024b_integrative_client.model.user;
 
+import com.example.a2024b_integrative_client.RoleEnumBoundary;
+
 public class NewUserBoundary {
-    private String role;
+    private RoleEnumBoundary role;
     private String username;
     private String avatar;
     private String email;
 
-    public NewUserBoundary(String role, String username, String avatar, String email) {
+    public NewUserBoundary(RoleEnumBoundary role, String username, String avatar, String email) {
         this.role = role;
         this.username = username;
         this.avatar = avatar;
         this.email = email;
     }
 
-    public String getRole() {
+    public RoleEnumBoundary getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEnumBoundary role) {
         this.role = role;
     }
 
