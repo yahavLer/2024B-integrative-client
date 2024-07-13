@@ -1,8 +1,5 @@
 package com.example.a2024b_integrative_client.Adapter;
 
-import static android.os.Build.VERSION_CODES.R;
-import static android.view.View.inflate;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2024b_integrative_client.ObjectCallback;
+import com.example.a2024b_integrative_client.R;
 import com.example.a2024b_integrative_client.model.object.ObjectBoundary;
 
 import java.util.List;
@@ -35,7 +33,6 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ObjectBoun
                 .inflate(R.layout.item_object, parent, false);
         return new ObjectBoundaryViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ObjectBoundaryViewHolder holder, int position) {
         ObjectBoundary store = objectBoundaryList.get(position);
@@ -57,9 +54,9 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ObjectBoun
 
         public ObjectBoundaryViewHolder(@NonNull View itemView) {
             super(itemView);
-            object_alias = itemView.findViewById(R.id.benefit_name);
-            object_location = itemView.findViewById(R.id.benefit_description);
-            object_datails = itemView.findViewById(R.id.benefit_expiration);
+            object_alias = itemView.findViewById(R.id.object_alias);
+            object_location = itemView.findViewById(R.id.object_location);
+            object_datails = itemView.findViewById(R.id.object_datails);
         }
     }
 }

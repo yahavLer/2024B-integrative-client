@@ -15,23 +15,43 @@
         tools:context=".view.activity_clubs_screen">
 
         <TextView
+            android:id="@+id/club_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Clubs"
-            android:textSize="24sp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"/>
+            android:text="club"
+            android:textSize="32dp"
+            android:background="@color/colorAccent" />
 
-        <EditText
-            android:id="@+id/et_search_store"
+        <LinearLayout
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search Store"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"/>
+            android:orientation="horizontal"
+            android:background="@drawable/search_background"
+            android:padding="8dp"
+            android:layout_below="@id/club_text"
+            android:layout_marginBottom="4dp">
+
+            <SearchView
+                android:id="@+id/search_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:queryHint="Search by club here"
+                android:iconifiedByDefault="false"
+                android:background="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:textColor="@color/textColorPrimary"
+                android:backgroundTint="@color/colorPrimary" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/store_recycler_view"
+            android:id="@+id/club_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_below="@id/search_view"

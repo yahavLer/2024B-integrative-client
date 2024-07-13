@@ -32,8 +32,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class activity_main_screen extends AppCompatActivity {
+    List<ObjectBoundary> store_objects;
     RecyclerView main_LST_store;
-
     TextView welcome_text;
     SearchView search_text;
     Button search_button;
@@ -50,7 +50,6 @@ public class activity_main_screen extends AppCompatActivity {
         objectApi = RetrofitClient.getInstance().create(ObjectApi.class);
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
         userApi = RetrofitClient.getInstance().create(UserApi.class);
-
         Intent prev=getIntent();
         String json= prev.getStringExtra("UserBoundary");
         if(json!=null){
@@ -61,24 +60,23 @@ public class activity_main_screen extends AppCompatActivity {
 
         userName = userBoundary.getUsername();
         welcome_text.setText("Welcome " + userName);
-
+        store_objects = initViewsStores(userBoundary);
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String store =search_text.getQuery().toString();
                 Log.e("search_text", "search_text: " + store);
-                findStores(store, userBoundary);
+                findStore(store, userBoundary);
                 search_text.setQuery("", false);
                 search_text.clearFocus();
             }
         });
     }
-
-    private List<ObjectBoundary> findStores(String store, UserBoundary userBoundary){
-        List<ObjectBoundary>benefits_objects = new ArrayList<>();
+    private void findStore(String store, UserBoundary userBoundary) {
+        ObjectBoundary storeBoundary;
         String superapp = CurrentUser.getInstance().getTheUser().getUserId().getSuperapp();
         String email = CurrentUser.getInstance().getTheUser().getUserId().getEmail();
-        objectApi.searchObjectsByType("store", superapp,email, 10,0 ).enqueue(new Callback<List<ObjectBoundary>>() {
+        objectApi.searchObjectsByExactAlias(store, superapp, email,1,0).enqueue(new Callback<List<ObjectBoundary>>() {
             @Override
             public void onResponse(Call<List<ObjectBoundary>> call, Response<List<ObjectBoundary>> response) {
                 if (response.isSuccessful()) {
@@ -88,7 +86,8 @@ public class activity_main_screen extends AppCompatActivity {
                             Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.super.getParent());
+                        //not sure
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_store.setLayoutManager(linearLayoutManager);
                         main_LST_store.setAdapter(objectAdapter);
@@ -102,15 +101,43 @@ public class activity_main_screen extends AppCompatActivity {
                 My_Signal.getInstance().toast("API call failed: " + t.getMessage());
             }
         });
-        return null;
+    }
+    private List<ObjectBoundary> initViewsStores(UserBoundary userBoundary){
+        List<ObjectBoundary>store_objects = new ArrayList<>();
+        String superapp = CurrentUser.getInstance().getTheUser().getUserId().getSuperapp();
+        String email = CurrentUser.getInstance().getTheUser().getUserId().getEmail();
+        objectApi.searchObjectsByType("store", superapp,email, 10,0 ).enqueue(new Callback<List<ObjectBoundary>>() {
+            @Override
+            public void onResponse(Call<List<ObjectBoundary>> call, Response<List<ObjectBoundary>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body()!=null){
+                        List<ObjectBoundary> objectBoundary = response.body();
+                        for (int i=0 ; i<objectBoundary.size();i++){
+                            Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
+                        }
+                        ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.super.getParent());
+                        //not sure
+                        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                        main_LST_store.setLayoutManager(linearLayoutManager);
+                        main_LST_store.setAdapter(objectAdapter);
+                    }
+                } else {
+                    My_Signal.getInstance().toast("API call failed: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ObjectBoundary>> call, Throwable t) {
+                My_Signal.getInstance().toast("API call failed: " + t.getMessage());
+            }
+        });
+        return store_objects;
     }
 
     private void findView() {
         welcome_text = findViewById(R.id.welcome_text);
         search_text = findViewById(R.id.search_text);
         search_button = findViewById(R.id.search_button);
-        main_LST_store = findViewById(R.id.store_recycler_view);
-
-
+        main_LST_store = findViewById(R.id.club_recycler_view);
     }
 }
