@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2024b_integrative_client.Adapter.ObjectAdapter;
 import com.example.a2024b_integrative_client.My_Signal;
+import com.example.a2024b_integrative_client.ObjectCallback;
 import com.example.a2024b_integrative_client.R;
 import com.example.a2024b_integrative_client.api.MiniAppCommandApi;
 import com.example.a2024b_integrative_client.api.ObjectApi;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class activity_clubs_screen extends AppCompatActivity {
+public class activity_clubs_screen extends AppCompatActivity implements ObjectCallback {
     UserBoundary userBoundary;
     List<ObjectBoundary> club_objects;
     RecyclerView main_LST_club;
@@ -59,9 +60,9 @@ public class activity_clubs_screen extends AppCompatActivity {
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String store =search_text.getQuery().toString();
-                Log.e("search_text", "search_text: " + store);
-                findClub(store, userBoundary);
+                String club =search_text.getQuery().toString();
+                Log.e("search_text", "search_text: " + club);
+                findClub(club, userBoundary);
                 search_text.setQuery("", false);
                 search_text.clearFocus();
             }
@@ -82,8 +83,7 @@ public class activity_clubs_screen extends AppCompatActivity {
                             Log.e("club " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs_screen.super.getParent());
-                        //not sure
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs_screen.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_club.setLayoutManager(linearLayoutManager);
                         main_LST_club.setAdapter(objectAdapter);
@@ -113,8 +113,8 @@ public class activity_clubs_screen extends AppCompatActivity {
                             Log.e("club " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs_screen.super.getParent());
-                        //not sure
+                        objectAdapter.setObjectCallback(activity_clubs_screen.this); // הגדרת callback
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs_screen.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_club.setLayoutManager(linearLayoutManager);
                         main_LST_club.setAdapter(objectAdapter);
@@ -130,6 +130,13 @@ public class activity_clubs_screen extends AppCompatActivity {
         });
         return club_objects;
     }
+
+    @Override
+    public void onObjectClick(ObjectBoundary object) {
+        // טיפול באירוע הלחיצה על פריט ב-RecyclerView
+        Log.d("activity_clubs_screen", "Clicked on: " + object.getAlias());
+    }
+
     private void findView() {
         welcome_text = findViewById(R.id.welcome_text);
         search_text = findViewById(R.id.search_text);

@@ -35,10 +35,19 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ObjectBoun
     }
     @Override
     public void onBindViewHolder(@NonNull ObjectBoundaryViewHolder holder, int position) {
-        ObjectBoundary store = objectBoundaryList.get(position);
-        holder.object_alias.setText(store.getAlias());
-        holder.object_location.setText(store.getLocation().toString());
-        holder.object_datails.setText(store.getObjectDetails().toString());
+        ObjectBoundary object = objectBoundaryList.get(position);
+        holder.object_alias.setText(object.getAlias());
+        holder.object_location.setText(object.getLocation().toString());
+        holder.object_datails.setText(object.getObjectDetails().toString());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (objectCallback != null) {
+                    objectCallback.onObjectClick(object);
+                }
+            }
+        });
     }
 
     @Override

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2024b_integrative_client.Adapter.ObjectAdapter;
 import com.example.a2024b_integrative_client.My_Signal;
+import com.example.a2024b_integrative_client.ObjectCallback;
 import com.example.a2024b_integrative_client.R;
 import com.example.a2024b_integrative_client.api.MiniAppCommandApi;
 import com.example.a2024b_integrative_client.api.ObjectApi;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class activity_main_screen extends AppCompatActivity {
+public class activity_main_screen extends AppCompatActivity implements ObjectCallback {
     List<ObjectBoundary> store_objects;
     RecyclerView main_LST_store;
     TextView welcome_text;
@@ -86,8 +87,7 @@ public class activity_main_screen extends AppCompatActivity {
                             Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.super.getParent());
-                        //not sure
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_store.setLayoutManager(linearLayoutManager);
                         main_LST_store.setAdapter(objectAdapter);
@@ -116,8 +116,8 @@ public class activity_main_screen extends AppCompatActivity {
                             Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.super.getParent());
-                        //not sure
+                        objectAdapter.setObjectCallback(activity_main_screen.this); // הגדרת callback
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_store.setLayoutManager(linearLayoutManager);
                         main_LST_store.setAdapter(objectAdapter);
@@ -133,7 +133,11 @@ public class activity_main_screen extends AppCompatActivity {
         });
         return store_objects;
     }
-
+    @Override
+    public void onObjectClick(ObjectBoundary object) {
+        // טיפול באירוע הלחיצה על פריט ב-RecyclerView
+        Log.d("activity_clubs_screen", "Clicked on: " + object.getAlias());
+    }
     private void findView() {
         welcome_text = findViewById(R.id.welcome_text);
         search_text = findViewById(R.id.search_text);
