@@ -6,17 +6,17 @@ import java.util.Map;
 
 public class MiniAppCommandBoundary {
 
-	private MiniAppCommandID commandId;
+	private CommandId commandId;
 	private String command;
 	private TargetObject targetObject;
 	private Date invocationTimestamp;
-	private InvocationUser invokedBy;
+	private CreatedBy invokedBy;
     private Map<String, Object> commandAttributes;
 	
 	public MiniAppCommandBoundary() {}
 
-	public MiniAppCommandBoundary(MiniAppCommandID commandId, String command, TargetObject targetObject,
-			Date invocationTimestamp, InvocationUser invokedBy, Map<String, Object> commandAttributes) {
+	public MiniAppCommandBoundary(CommandId commandId, String command, TargetObject targetObject,
+								  Date invocationTimestamp, CreatedBy invokedBy, Map<String, Object> commandAttributes) {
 		this.commandId = commandId;
 		this.command = command;
 		this.targetObject = targetObject;
@@ -26,12 +26,12 @@ public class MiniAppCommandBoundary {
 	}
 
 
-	public MiniAppCommandID getCommandId() {
+	public CommandId getCommandId() {
 		return commandId;
 	}
 
 
-	public void setCommandId(MiniAppCommandID commandId) {
+	public void setCommandId(CommandId commandId) {
 		this.commandId = commandId;
 	}
 
@@ -66,12 +66,12 @@ public class MiniAppCommandBoundary {
 	}
 
 
-	public InvocationUser getInvokedBy() {
+	public CreatedBy getInvokedBy() {
 		return invokedBy;
 	}
 
 
-	public void setInvokedBy(InvocationUser invokedBy) {
+	public void setInvokedBy(CreatedBy invokedBy) {
 		this.invokedBy = invokedBy;
 	}
 

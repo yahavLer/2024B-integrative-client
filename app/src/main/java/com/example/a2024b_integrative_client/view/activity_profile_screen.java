@@ -9,28 +9,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a2024b_integrative_client.R;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
+import com.google.gson.Gson;
 
 public class activity_profile_screen extends AppCompatActivity {
     UserBoundary userBoundary;
+    TextView EDT_Hello;
     TextView EDT_username;
     TextView EDT_email;
     TextView EDT_userId;
     TextView EDT_role;
     Button btn_favorite;
+    Gson gson= new Gson();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_screen);
         Intent prev=getIntent();
-        userBoundary = (UserBoundary)prev.getSerializableExtra("UserBoundary");
+        String json= prev.getStringExtra("UserBoundary");
+        if(json!=null){
+            userBoundary=gson.fromJson(json, UserBoundary.class);
+        }
         findView();
         NevigationActivity.findNevigationButtens(this,userBoundary);
+        EDT_Hello.setText("Hello " + userBoundary.getUsername());
         EDT_username.setText(userBoundary.getUsername());
         EDT_email.setText(userBoundary.getUserId().getEmail());
-        EDT_userId.setText(userBoundary.getUserId().getSuperAPP()+" "+ userBoundary.getUserId().getEmail());
+        EDT_userId.setText(userBoundary.getUserId().getSuperapp()+" "+ userBoundary.getUserId().getEmail());
         EDT_role.setText(userBoundary.getRole().toString());
     }
 
     private void findView() {
+        EDT_Hello = findViewById(R.id.Hello);
         EDT_username = findViewById(R.id.profile_EDT_username);
         EDT_email = findViewById(R.id.profile_EDT_email);
         EDT_userId = findViewById(R.id.profile_EDT_userId);

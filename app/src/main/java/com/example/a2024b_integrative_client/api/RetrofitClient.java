@@ -7,6 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
+    private static MiniAppCommandApi miniAppCommandApi = null;
     private static Retrofit retrofit = null;
     private static final String BASE_URL = "http://192.168.1.174:8085/";
 //    private static final String BASE_URL = "http://192.168.1.154:8085/";
@@ -26,5 +27,13 @@ public class RetrofitClient {
                     .build();
         }
         return retrofit;
+    }
+
+    // יצירת אובייקט של MiniAppCommandApi
+    public static synchronized MiniAppCommandApi getMiniAppCommandApi() {
+        if (miniAppCommandApi == null) {
+            miniAppCommandApi = getInstance().create(MiniAppCommandApi.class);
+        }
+        return miniAppCommandApi;
     }
 }

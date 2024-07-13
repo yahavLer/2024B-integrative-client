@@ -2,18 +2,18 @@ package com.example.a2024b_integrative_client.model.miniappCommand;
 
 public class TargetObject {
 
-	private SuperAppObjectIdBoundary objectId;
+	private ObjectId objectId;
 	public TargetObject() {}
 
-	public TargetObject(SuperAppObjectIdBoundary objectId) {
+	public TargetObject(ObjectId objectId) {
 		this.objectId = objectId;
 	}
 
-	public SuperAppObjectIdBoundary getObjectId() {
+	public ObjectId getObjectId() {
 		return objectId;
 	}
 
-	public void setObjectId(SuperAppObjectIdBoundary objectId) {
+	public void setObjectId(ObjectId objectId) {
 		this.objectId = objectId;
 	}
 

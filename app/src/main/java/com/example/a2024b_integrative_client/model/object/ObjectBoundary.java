@@ -1,13 +1,13 @@
 package com.example.a2024b_integrative_client.model.object;
 
 
-import com.example.a2024b_integrative_client.model.miniappCommand.SuperAppObjectIdBoundary;
+import com.example.a2024b_integrative_client.model.miniappCommand.ObjectId;
 
 import java.util.Date;
 import java.util.Map;
 
 public class ObjectBoundary {
-    private SuperAppObjectIdBoundary objectId;
+    private ObjectId objectId;
     private String type;
     private String alias;
     private Boolean active;
@@ -18,7 +18,7 @@ public class ObjectBoundary {
 
     public ObjectBoundary() {}
 
-    public ObjectBoundary(SuperAppObjectIdBoundary objectId, String type, String alias, Boolean active, Date creationTimestamp,
+    public ObjectBoundary(ObjectId objectId, String type, String alias, Boolean active, Date creationTimestamp,
                           LocationBoundary location, CreatedBy createdBy, Map<String, Object> objectDetails) {
         // 1 2
         this.objectId = objectId;
@@ -36,11 +36,11 @@ public class ObjectBoundary {
     }
 
 
-    public SuperAppObjectIdBoundary getObjectId() {
+    public ObjectId getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(SuperAppObjectIdBoundary objectId) {
+    public void setObjectId(ObjectId objectId) {
         this.objectId = objectId;
     }
 

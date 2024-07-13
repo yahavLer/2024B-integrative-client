@@ -19,17 +19,42 @@ public interface ObjectApi {
     Call<ObjectBoundary> createObject(@Body ObjectBoundary objectBoundary);
 
     @GET("/superapp/objects")
-    Call<List<ObjectBoundary>> getAllObjectsUsingPagination(@Query("userSuperapp") String userSuperapp,
-                                                            @Query("userEmail") String email,
+    Call<List<ObjectBoundary>> GetAllObjects(@Query("userSuperapp") String superapp,
+                                                            @Query("email") String email,
                                                             @Query("size") int size,
                                                             @Query("page") int page);
 
     @GET("/superapp/objects/search/byType/{type}")
-    Call<List<ObjectBoundary>> getObjectByType(@Path("type") String type,
-                                               @Query("userSuperapp") String userSuperapp,
+    Call<List<ObjectBoundary>> searchObjectsByType(@Path("type") String type,
+                                               @Query("userSuperapp") String superapp,
                                                @Query("userEmail") String email,
                                                @Query("size") int size,
                                                @Query("page") int page);
+
+    @GET("/superapp/objects/search/byAlias/{alias}")
+    Call<List<ObjectBoundary>> searchObjectsByExactAlias(@Path("alias") String alias,
+                                                   @Query("userSuperapp") String superapp,
+                                                   @Query("userEmail") String email,
+                                                   @Query("size") int size,
+                                                   @Query("page") int page);
+
+    @GET("/superapp/objects/search/byAliasPattern/{pattern}")
+    Call<List<ObjectBoundary>> searchObjectsByAliasPattern(@Path("lat") double lat,
+                                                           @Path("lng") double lng,
+                                                           @Path("distance") double distance,
+                                                         @Query("distanceUnits") String distanceUnits,
+                                                         @Query("userSuperapp") String superapp,
+                                                         @Query("userEmail") String email,
+                                                         @Query("size") int size,
+                                                         @Query("page") int page);
+
+    @GET("/superapp/objects/search/byLocation/{lat}/{lng}/{distance}")
+    Call<List<ObjectBoundary>> getObjectsInRadius(@Path("pattern") String pattern,
+                                                           @Query("userSuperapp") String superapp,
+                                                           @Query("userEmail") String email,
+                                                           @Query("size") int size,
+                                                           @Query("page") int page);
+
     @PUT("/superapp/objects/{superapp}/{internalObjectId}?userSuperapp={userSuperapp}&userEmail={email}")
     void updateObject(@Path("superapp") String superapp,
                       @Path("internalObjectId") String id,
@@ -47,3 +72,5 @@ public interface ObjectApi {
 
 
 }
+
+

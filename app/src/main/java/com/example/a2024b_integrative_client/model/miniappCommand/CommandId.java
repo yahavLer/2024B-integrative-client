@@ -1,14 +1,14 @@
 package com.example.a2024b_integrative_client.model.miniappCommand;
 
-public class MiniAppCommandID {
+public class CommandId {
 
 	private String superapp;
 	private String miniapp; 
 	private String internalCommandId;
 	
-	public MiniAppCommandID() {}
+	public CommandId() {}
 
-	public MiniAppCommandID(String superapp, String miniapp, String internalCommandId) {
+	public CommandId(String superapp, String miniapp, String internalCommandId) {
 		this.superapp = superapp;
 		this.miniapp = miniapp;
 		this.internalCommandId = internalCommandId;

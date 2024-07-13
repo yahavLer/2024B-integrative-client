@@ -15,13 +15,14 @@ import com.example.a2024b_integrative_client.model.CurrentUser;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class activity_login extends AppCompatActivity {
-
+    private Gson gson = new Gson();
     private MaterialTextView Login_LBL_Login;
     private AppCompatEditText Login_EDT_Email;
     private MaterialButton Login_BTN_Login;
@@ -70,7 +71,8 @@ public class activity_login extends AppCompatActivity {
         //Todo: load all the details
         CurrentUser.init(body);
         Intent intent = new Intent(this, activity_main_screen.class);
-        intent.putExtra("UserBoundary", body);
+        String json = gson.toJson(body);
+        intent.putExtra("UserBoundary", json);
         startActivity(intent);
     }
 

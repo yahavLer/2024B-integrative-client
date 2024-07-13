@@ -24,6 +24,7 @@ import com.example.a2024b_integrative_client.model.CurrentUser;
 import com.example.a2024b_integrative_client.model.user.NewUserBoundary;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +40,7 @@ public class activity_registration extends AppCompatActivity {
     private Spinner signup_SPN_club_membership;
     private MaterialButton signup_BTN_Register;
     private UserApi mApi;
+    private Gson gson = new Gson();
 
 
 
@@ -123,14 +125,7 @@ public class activity_registration extends AppCompatActivity {
             public void onResponse(Call<UserBoundary> call, Response<UserBoundary> response) {
                 if (response.isSuccessful()) {
                     if (response.body()!=null){
-                        Log.e("createUser", "Response body: " + response.body().toString());
                         UserBoundary userBoundary = response.body();
-                        Log.e("createUser", "UserId: " + userBoundary.getUserId());
-                        Log.e("createUser", "Username: " + userBoundary.getUsername());
-                        Log.e("createUser", "Role: " + userBoundary.getRole());
-                        Log.e("createUser", "Avatar: " + userBoundary.getAvatar());
-
-                        Log.e("createUser: ", "user creat succesfully" );
                     }else{
                         Log.e("UserBoundrey is null: " , "");
                     }
@@ -151,7 +146,8 @@ public class activity_registration extends AppCompatActivity {
         //TODO: check to add a delay before remove to the home page to show the success message
         CurrentUser.init(user);
         Intent intent = new Intent(activity_registration.this, activity_main_screen.class);
-        intent.putExtra("UserBoundary", user);
+        String json = gson.toJson(user);
+        intent.putExtra("UserBoundary", json);
         startActivity(intent);
     }
 

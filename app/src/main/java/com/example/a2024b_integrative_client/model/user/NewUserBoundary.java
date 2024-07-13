@@ -1,8 +1,10 @@
 package com.example.a2024b_integrative_client.model.user;
 
 import com.example.a2024b_integrative_client.RoleEnumBoundary;
+import com.google.gson.Gson;
 
 public class NewUserBoundary {
+
     private RoleEnumBoundary role;
     private String username;
     private String avatar;
@@ -13,6 +15,7 @@ public class NewUserBoundary {
         this.username = username;
         this.avatar = avatar;
         this.email = email;
+
     }
 
     public RoleEnumBoundary getRole() {

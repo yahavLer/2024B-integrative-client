@@ -1,10 +1,7 @@
 package com.example.a2024b_integrative_client.model.user;
 
-import java.io.Serializable;
+public class UserId {
 
-public class UserId implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     private String superapp;
     private String email;
@@ -16,12 +13,12 @@ public class UserId implements Serializable {
         this.email = email;
     }
 
-    public String getSuperAPP() {
+    public String getSuperapp() {
         return superapp;
     }
 
-    public void setSuperAPP(String superApp) {
-        this.superapp = superApp;
+    public void setSuperapp(String superapp) {
+        this.superapp = superapp;
     }
 
     public String getEmail() {

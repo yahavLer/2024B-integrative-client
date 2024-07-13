@@ -7,6 +7,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+//        ImageLoader.init(this);
 
         My_Signal.init(this);
     }

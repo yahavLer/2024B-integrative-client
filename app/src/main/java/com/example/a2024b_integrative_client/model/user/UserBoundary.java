@@ -1,13 +1,10 @@
 package com.example.a2024b_integrative_client.model.user;
 
 import com.example.a2024b_integrative_client.RoleEnumBoundary;
+import com.google.gson.Gson;
 
-import java.io.Serializable;
-
-public class UserBoundary implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class UserBoundary  {
+    private Gson gson;
     private UserId userId;
     private RoleEnumBoundary role;
     private String username;
@@ -15,6 +12,7 @@ public class UserBoundary implements Serializable {
 
     public UserBoundary() {}
     public UserBoundary(UserId userId, RoleEnumBoundary role, String username, String avatar) {
+        gson=new Gson();
         this.userId = userId;
         this.role = role;
         this.username = username;
@@ -52,6 +50,7 @@ public class UserBoundary implements Serializable {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 
     @Override
     public String toString() {

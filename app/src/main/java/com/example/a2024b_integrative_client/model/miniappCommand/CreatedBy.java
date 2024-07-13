@@ -3,12 +3,12 @@ package com.example.a2024b_integrative_client.model.miniappCommand;
 
 import com.example.a2024b_integrative_client.model.user.UserId;
 
-public class InvocationUser {
+public class CreatedBy {
 	private UserId userId;
 	
-	public InvocationUser() {}
+	public CreatedBy() {}
 
-	public InvocationUser(UserId userId) {
+	public CreatedBy(UserId userId) {
 		this.userId = userId;
 	}
 
