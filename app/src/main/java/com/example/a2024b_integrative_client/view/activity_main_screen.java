@@ -21,6 +21,7 @@ import com.example.a2024b_integrative_client.api.ObjectApi;
 import com.example.a2024b_integrative_client.api.RetrofitClient;
 import com.example.a2024b_integrative_client.api.UserApi;
 import com.example.a2024b_integrative_client.model.CurrentUser;
+import com.example.a2024b_integrative_client.model.miniappCommand.MiniAppCommandBoundary;
 import com.example.a2024b_integrative_client.model.object.ObjectBoundary;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
     ObjectApi objectApi;
     MiniAppCommandApi commandApi;
     UserApi userApi;
+    MiniAppCommandBoundary commandBoundary;
     Gson gson = new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
         objectApi = RetrofitClient.getInstance().create(ObjectApi.class);
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
         userApi = RetrofitClient.getInstance().create(UserApi.class);
+        commandBoundary = new MiniAppCommandBoundary();
         Intent prev=getIntent();
         String json= prev.getStringExtra("UserBoundary");
         if(json!=null){
@@ -137,7 +140,24 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
     public void onObjectClick(ObjectBoundary object) {
         // טיפול באירוע הלחיצה על פריט ב-RecyclerView
         Log.d("activity_clubs_screen", "Clicked on: " + object.getAlias());
+        Call<Object> call =commandApi.invokeCommand("find Your Benefit_findBenefitsByStore", false, commandBoundary);
+        call.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                if (response.isSuccessful()) {
+                    Log.d("API_CALL", "Success: " + response.body().toString());
+                } else {
+                    Log.d("API_CALL", "Failed: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                Log.e("API_CALL", "Error: " + t.getMessage());
+            }
+        });
     }
+
     private void findView() {
         welcome_text = findViewById(R.id.welcome_text);
         search_text = findViewById(R.id.search_text);
