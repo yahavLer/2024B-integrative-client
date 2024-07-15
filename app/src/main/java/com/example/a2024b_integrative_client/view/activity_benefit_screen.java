@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class ActivityBenefitScreen extends AppCompatActivity {
+public class activity_benefit_screen extends AppCompatActivity {
     TextView benefitTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

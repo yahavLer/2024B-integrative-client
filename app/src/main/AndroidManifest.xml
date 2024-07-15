@@ -41,6 +41,9 @@
         <activity android:name=".view.activity_main_screen" />
         <activity android:name=".view.activity_profile_screen" />
         <activity android:name=".view.activity_clubs_screen" />
+        <activity android:name=".view.activity_benefit_screen" />
+
+
     </application>
 
 </manifest>

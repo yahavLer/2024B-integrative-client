@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!-- res/layout/fragment_benefit.xml -->
+    android:layout_height="match_parent">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,28 +31,13 @@
                 android:background="@color/colorAccent" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/benefit_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_above="@id/bottom_navigation"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="4dp"
-            tools:listitem="@layout/item_object"
-            android:layout_weight="20"/>
-
-        <include layout="@layout/buttom_menu"
-            android:id="@+id/bottom_navigation"
+        <TextView
+            android:id="@+id/benefit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
-            app:itemIconTint="@color/textColorPrimary"
-            app:itemTextColor="@color/backgroundColor"
-            app:labelVisibilityMode="labeled"/>
-
+            android:text="No benefits available"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
