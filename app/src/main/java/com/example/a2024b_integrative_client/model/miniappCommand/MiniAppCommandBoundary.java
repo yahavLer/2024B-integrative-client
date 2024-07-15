@@ -1,6 +1,7 @@
 package com.example.a2024b_integrative_client.model.miniappCommand;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -15,14 +16,13 @@ public class MiniAppCommandBoundary {
 	
 	public MiniAppCommandBoundary() {}
 
-	public MiniAppCommandBoundary(CommandId commandId, String command, TargetObject targetObject,
-								  Date invocationTimestamp, CreatedBy invokedBy, Map<String, Object> commandAttributes) {
-		this.commandId = commandId;
+	public MiniAppCommandBoundary(String command, TargetObject targetObject, CreatedBy invokedBy) {
+		this.commandId = new CommandId("","","");
 		this.command = command;
 		this.targetObject = targetObject;
-		this.invocationTimestamp = invocationTimestamp;
 		this.invokedBy = invokedBy;
-		this.commandAttributes = commandAttributes;
+		this.commandAttributes = new HashMap<>();
+		this.invocationTimestamp = new Date();
 	}
 
 
@@ -88,9 +88,14 @@ public class MiniAppCommandBoundary {
 
 	@Override
 	public String toString() {
-		return "MiniAppCommandBoundary [commandID=" + commandId + ", command=" + command + ", targetObject="
-				+ targetObject + ", invocationTimestamp=" + invocationTimestamp + ", invokedBy=" + invokedBy
-				+ ", commandAttributes=" + commandAttributes + "]";
+		return "MiniAppCommandBoundary{" +
+				"commandId=" + commandId +
+				", command='" + command + '\'' +
+				", targetObject=" + targetObject +
+				", invocationTimeStamp=" + invocationTimestamp +
+				", invokedBy=" + invokedBy +
+				", commandAttributes=" + commandAttributes +
+				'}';
 	}
 	
 }

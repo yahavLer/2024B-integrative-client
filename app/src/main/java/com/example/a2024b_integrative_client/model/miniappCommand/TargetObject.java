@@ -19,7 +19,9 @@ public class TargetObject {
 
 	@Override
 	public String toString() {
-		return "TargetObject [objectId=" + objectId + "]";
+		return "TargetObject{" +
+				objectId.toString() +
+				'}';
 	}
 
 	

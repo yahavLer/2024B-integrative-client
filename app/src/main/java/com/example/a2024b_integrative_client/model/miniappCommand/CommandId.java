@@ -4,14 +4,14 @@ public class CommandId {
 
 	private String superapp;
 	private String miniapp; 
-	private String internalCommandId;
+	private String id;
 	
 	public CommandId() {}
 
 	public CommandId(String superapp, String miniapp, String internalCommandId) {
 		this.superapp = superapp;
 		this.miniapp = miniapp;
-		this.internalCommandId = internalCommandId;
+		this.id = internalCommandId;
 	}
 
 	public String getSuperapp() {
@@ -31,17 +31,19 @@ public class CommandId {
 	}
 
 	public String getInternalCommandId() {
-		return internalCommandId;
+		return id;
 	}
 
 	public void setInternalCommandId(String internalCommandId) {
-		this.internalCommandId = internalCommandId;
+		this.id = internalCommandId;
 	}
 
 	@Override
 	public String toString() {
-		return "MiniAppCommandID [superapp=" + superapp + ", miniapp=" + miniapp + ", internalCommandId="
-				+ internalCommandId + "]";
+		return "CommandId:/n "
+				+ "{superApp=" + superapp + "/n"
+				+ ", miniApp=" + miniapp
+				+ "/n, id=" + id + "}";
 	}
 	
 }

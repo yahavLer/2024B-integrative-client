@@ -29,7 +29,10 @@ public class ObjectId {
 
 	@Override
 	public String toString() {
-		return "SuperAppObjectIdBoundary [superapp=" + superapp + ", internalObjectId=" + id + "]";
+		return "ObjectId{" +
+				"id='" + id + "/n" +
+				", superapp='" + superapp + "/n" +
+				'}';
 	}
 
 	

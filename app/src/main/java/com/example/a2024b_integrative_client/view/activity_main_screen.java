@@ -21,11 +21,15 @@ import com.example.a2024b_integrative_client.api.ObjectApi;
 import com.example.a2024b_integrative_client.api.RetrofitClient;
 import com.example.a2024b_integrative_client.api.UserApi;
 import com.example.a2024b_integrative_client.model.CurrentUser;
+import com.example.a2024b_integrative_client.model.miniappCommand.CreatedBy;
 import com.example.a2024b_integrative_client.model.miniappCommand.MiniAppCommandBoundary;
+import com.example.a2024b_integrative_client.model.miniappCommand.TargetObject;
 import com.example.a2024b_integrative_client.model.object.ObjectBoundary;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +57,6 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
         objectApi = RetrofitClient.getInstance().create(ObjectApi.class);
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
         userApi = RetrofitClient.getInstance().create(UserApi.class);
-        commandBoundary = new MiniAppCommandBoundary();
         Intent prev=getIntent();
         String json= prev.getStringExtra("UserBoundary");
         if(json!=null){
@@ -116,7 +119,9 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
                     if (response.body()!=null){
                         List<ObjectBoundary> objectBoundary = response.body();
                         for (int i=0 ; i<objectBoundary.size();i++){
-                            Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
+                            Log.e("store Alias " + i, objectBoundary.get(i).getAlias() +"\n");
+                            Log.e("store id " + i, objectBoundary.get(i).getObjectId() +"\n");
+                            Log.e("store created by " + i, objectBoundary.get(i).getCreatedBy() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
                         objectAdapter.setObjectCallback(activity_main_screen.this); // הגדרת callback
@@ -136,27 +141,55 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
         });
         return store_objects;
     }
+
     @Override
     public void onObjectClick(ObjectBoundary object) {
         // טיפול באירוע הלחיצה על פריט ב-RecyclerView
         Log.d("activity_clubs_screen", "Clicked on: " + object.getAlias());
-        Call<Object> call =commandApi.invokeCommand("find Your Benefit_findBenefitsByStore", false, commandBoundary);
-        call.enqueue(new Callback<Object>() {
+        Log.d("CreatedBy",object.getCreatedBy().getUserId().toString() );
+        Log.d("targetObject",object.getObjectId().toString() );
+
+        TargetObject storeTargetObject = new TargetObject(object.getObjectId());
+        CreatedBy createdBy = new CreatedBy(userBoundary.getUserId());
+        MiniAppCommandBoundary commandBoundary = new MiniAppCommandBoundary("findBenefitsByStore", storeTargetObject, createdBy);
+        Log.d("commandBoundary", "Command: " + commandBoundary.getCommand());
+        Log.d("commandBoundary", "Target Object: "+ commandBoundary.getTargetObject().getObjectId());
+        Log.d("commandBoundary", "Created By: " + commandBoundary.getInvokedBy().getUserId().getEmail());
+        Log.d("commandBoundary", "Timestamp: " + commandBoundary.getInvocationTimestamp());
+
+        commandApi.invokeCommand("findYourBenefit", false, commandBoundary).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
+                Log.e("store " , "command");
                 if (response.isSuccessful()) {
-                    Log.d("API_CALL", "Success: " + response.body().toString());
+                    Object responseBody = response.body();
+                    ArrayList<Object> benefit = (ArrayList<Object>) responseBody;
+                    Gson gson = new Gson();
+                    String json = gson.toJson(benefit);
+                    Type type = new TypeToken<ArrayList<ObjectBoundary>>(){}.getType();
+                    ArrayList<ObjectBoundary> benefitList = gson.fromJson(json, type);
+                    for (int i=0 ; i<benefitList.size();i++){
+                        Log.e("benefit  " + i, benefitList.get(i).toString() +"\n");
+                    }
+                    ObjectAdapter objectAdapter = new ObjectAdapter(benefitList);
+                    objectAdapter.setObjectCallback(activity_main_screen.this); // הגדרת callback
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.this);
+                    linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                    main_LST_store.setLayoutManager(linearLayoutManager);
+                    main_LST_store.setAdapter(objectAdapter);
+                    Log.d("API_CALL", "Success: " );
                 } else {
                     Log.d("API_CALL", "Failed: " + response.code());
                 }
             }
-
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 Log.e("API_CALL", "Error: " + t.getMessage());
             }
         });
     }
+
+
 
     private void findView() {
         welcome_text = findViewById(R.id.welcome_text);
