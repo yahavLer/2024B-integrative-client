@@ -94,6 +94,7 @@ public class activity_main extends AppCompatActivity implements ObjectCallback {
                             Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
+                        objectAdapter.setObjectCallback(activity_main.this); // הגדרת callback
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_store.setLayoutManager(linearLayoutManager);

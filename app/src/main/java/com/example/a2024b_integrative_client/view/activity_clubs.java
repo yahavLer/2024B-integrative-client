@@ -89,6 +89,7 @@ public class activity_clubs extends AppCompatActivity implements ObjectCallback 
                             Log.e("club " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
+                        objectAdapter.setObjectCallback(activity_clubs.this); // הגדרת callback
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_club.setLayoutManager(linearLayoutManager);
