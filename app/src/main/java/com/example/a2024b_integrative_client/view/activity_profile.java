@@ -2,10 +2,12 @@ package com.example.a2024b_integrative_client.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.a2024b_integrative_client.R;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.gson.Gson;
@@ -17,6 +19,7 @@ public class activity_profile extends AppCompatActivity {
     TextView EDT_email;
     TextView EDT_userId;
     TextView EDT_role;
+    ImageView profileImage;
     Gson gson= new Gson();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,22 @@ public class activity_profile extends AppCompatActivity {
         }
         findView();
         NevigationActivity.findNevigationButtens(this,userBoundary);
-        EDT_Hello.setText("Hello " + userBoundary.getUsername());
-        EDT_username.setText(userBoundary.getUsername());
-        EDT_email.setText(userBoundary.getUserId().getEmail());
-        EDT_userId.setText(userBoundary.getUserId().getSuperapp()+" "+ userBoundary.getUserId().getEmail());
-        EDT_role.setText(userBoundary.getRole().toString());
+        if (userBoundary != null) {
+            String avatarUrl = userBoundary.getAvatar();
+            String userName = userBoundary.getUsername();
+            EDT_Hello.setText("Hello " + userBoundary.getUsername());
+            EDT_username.setText(userBoundary.getUsername());
+            EDT_email.setText(userBoundary.getUserId().getEmail());
+            EDT_userId.setText(userBoundary.getUserId().getSuperapp()+" "+ userBoundary.getUserId().getEmail());
+            EDT_role.setText(userBoundary.getRole().toString());
+            // Load the image using Glide
+            Glide.with(this)
+                    .load(avatarUrl)
+                    .placeholder(R.drawable.unavailable_photo) // optional, shows while loading
+                    .error(R.drawable.error) // optional, shows if there's an error
+                    .into(profileImage);
+        }
+
     }
 
     private void findView() {
@@ -42,5 +56,6 @@ public class activity_profile extends AppCompatActivity {
         EDT_email = findViewById(R.id.profile_EDT_email);
         EDT_userId = findViewById(R.id.profile_EDT_userId);
         EDT_role = findViewById(R.id.profile_EDT_role);
+        profileImage = findViewById(R.id.profile_image);
     }
 }
