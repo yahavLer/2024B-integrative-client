@@ -145,7 +145,7 @@ public class activity_registration extends AppCompatActivity {
     private void confirmNewUserUI(UserBoundary user) {
         //TODO: check to add a delay before remove to the home page to show the success message
         CurrentUser.init(user);
-        Intent intent = new Intent(activity_registration.this, activity_main_screen.class);
+        Intent intent = new Intent(activity_registration.this, activity_main.class);
         String json = gson.toJson(user);
         intent.putExtra("UserBoundary", json);
         startActivity(intent);

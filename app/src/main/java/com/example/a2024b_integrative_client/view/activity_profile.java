@@ -2,7 +2,6 @@ package com.example.a2024b_integrative_client.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,14 +10,13 @@ import com.example.a2024b_integrative_client.R;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.gson.Gson;
 
-public class activity_profile_screen extends AppCompatActivity {
+public class activity_profile extends AppCompatActivity {
     UserBoundary userBoundary;
     TextView EDT_Hello;
     TextView EDT_username;
     TextView EDT_email;
     TextView EDT_userId;
     TextView EDT_role;
-    Button btn_favorite;
     Gson gson= new Gson();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +42,5 @@ public class activity_profile_screen extends AppCompatActivity {
         EDT_email = findViewById(R.id.profile_EDT_email);
         EDT_userId = findViewById(R.id.profile_EDT_userId);
         EDT_role = findViewById(R.id.profile_EDT_role);
-        btn_favorite = findViewById(R.id.btn_favorite);
     }
 }

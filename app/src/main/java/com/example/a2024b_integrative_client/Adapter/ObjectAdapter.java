@@ -39,6 +39,10 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ObjectBoun
         holder.object_alias.setText(object.getAlias());
         holder.object_location.setText(object.getLocation().toString());
         holder.object_datails.setText(object.getObjectDetails().toString());
+        holder.object_id.setText(object.getObjectId().toString());
+        holder.object_active.setText(object.getActive().toString());
+        holder.object_createdBy.setText(object.getCreatedBy().toString());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +63,9 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ObjectBoun
 
         public TextView object_alias;
         public TextView object_location;
+        public TextView object_id;
+        public TextView object_active;
+        public TextView object_createdBy;
         public TextView object_datails;
 
         public ObjectBoundaryViewHolder(@NonNull View itemView) {
@@ -66,6 +73,9 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ObjectBoun
             object_alias = itemView.findViewById(R.id.object_alias);
             object_location = itemView.findViewById(R.id.object_location);
             object_datails = itemView.findViewById(R.id.object_datails);
+            object_id =itemView.findViewById(R.id.object_id);
+            object_active=itemView.findViewById(R.id.object_active);
+            object_createdBy=itemView.findViewById(R.id.object_createdBy);
         }
     }
 }

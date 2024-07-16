@@ -19,7 +19,7 @@ public class NevigationActivity {
         navigation_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentHome = new Intent(actvity, activity_main_screen.class);
+                Intent intentHome = new Intent(actvity, activity_main.class);
                 String json =gson.toJson(userBoundary);
                 intentHome.putExtra("UserBoundary", json);
                 actvity.startActivity(intentHome);
@@ -29,7 +29,7 @@ public class NevigationActivity {
         navigation_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentProfile = new Intent(actvity, activity_profile_screen.class);
+                Intent intentProfile = new Intent(actvity, activity_profile.class);
                 String json =gson.toJson(userBoundary);
                 intentProfile.putExtra("UserBoundary", json);
                 actvity.startActivity(intentProfile);
@@ -39,7 +39,7 @@ public class NevigationActivity {
         navigation_clubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentClubs = new Intent(actvity, activity_clubs_screen.class);
+                Intent intentClubs = new Intent(actvity, activity_clubs.class);
                 String json =gson.toJson(userBoundary);
                 intentClubs.putExtra("UserBoundary", json);
                 actvity.startActivity(intentClubs);

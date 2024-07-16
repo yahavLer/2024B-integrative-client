@@ -38,10 +38,11 @@
         </activity>
         <activity android:name=".view.activity_registration" />
         <activity android:name=".view.activity_login" />
-        <activity android:name=".view.activity_main_screen" />
-        <activity android:name=".view.activity_profile_screen" />
-        <activity android:name=".view.activity_clubs_screen" />
-        <activity android:name=".view.activity_benefit_screen" />
+        <activity android:name=".view.activity_main" />
+        <activity android:name=".view.activity_profile" />
+        <activity android:name=".view.activity_clubs" />
+        <activity android:name=".view.activity_benefit_of_store" />
+        <activity android:name=".view.activity_stores_of_club" />
 
 
     </application>

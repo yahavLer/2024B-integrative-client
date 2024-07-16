@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".view.activity_clubs_screen">
+        tools:context=".view.activity_clubs">
 
         <TextView
             android:id="@+id/club_text"
@@ -20,7 +20,11 @@
             android:layout_height="wrap_content"
             android:text="club"
             android:textSize="32dp"
-            android:background="@color/colorAccent" />
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:gravity="center"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/search_background" />
 
         <LinearLayout
             android:id="@+id/search_view"

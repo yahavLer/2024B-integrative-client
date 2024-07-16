@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".view.activity_main">
+    tools:context=".view.activity_stores_of_club">
     <!--    tools:context=".view.activity_welcome">-->
 
     <RelativeLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:padding="16dp">
         <LinearLayout
-            android:id="@+id/welcome_view"
+            android:id="@+id/store_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -22,49 +22,22 @@
             android:padding="8dp"
             android:layout_marginBottom="4dp">
             <TextView
-                android:id="@+id/welcome_text"
+                android:id="@+id/store_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="welcome name"
+                android:text="Store of club "
                 android:gravity="center"
-                android:textStyle="bold"
                 android:textSize="32dp"
+                android:textStyle="bold"
                 android:background="@color/colorAccent" />
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/search_background"
-            android:padding="8dp"
-            android:layout_below="@id/welcome_view"
-            android:layout_marginBottom="4dp">
-
-            <SearchView
-                android:id="@+id/search_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:queryHint="Search by store here"
-                android:iconifiedByDefault="false"
-                android:background="@color/colorAccent" />
-
-            <Button
-                android:id="@+id/search_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                android:textColor="@color/textColorPrimary"
-                android:backgroundTint="@color/colorPrimary" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/store_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_below="@id/search_view"
+            android:layout_below="@id/store_view"
             android:layout_above="@id/bottom_navigation"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"

@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".view.activity_profile_screen">
+        tools:context=".view.activity_profile">
 
         <TextView
             android:id="@+id/Hello"
@@ -105,15 +105,6 @@
                 android:textSize="18sp"/>
         </GridLayout>
 
-
-        <Button
-            android:id="@+id/btn_favorite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/btn_favorite"
-            android:textSize="18sp" />
 
         <FrameLayout
             android:id="@+id/main_container"

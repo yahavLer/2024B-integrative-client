@@ -70,7 +70,7 @@ public class activity_login extends AppCompatActivity {
     private void openUserAccount(UserBoundary body) {
         //Todo: load all the details
         CurrentUser.init(body);
-        Intent intent = new Intent(this, activity_main_screen.class);
+        Intent intent = new Intent(this, activity_main.class);
         String json = gson.toJson(body);
         intent.putExtra("UserBoundary", json);
         startActivity(intent);

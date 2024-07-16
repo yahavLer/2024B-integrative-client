@@ -21,10 +21,15 @@ import com.example.a2024b_integrative_client.api.ObjectApi;
 import com.example.a2024b_integrative_client.api.RetrofitClient;
 import com.example.a2024b_integrative_client.api.UserApi;
 import com.example.a2024b_integrative_client.model.CurrentUser;
+import com.example.a2024b_integrative_client.model.miniappCommand.CreatedBy;
+import com.example.a2024b_integrative_client.model.miniappCommand.MiniAppCommandBoundary;
+import com.example.a2024b_integrative_client.model.miniappCommand.TargetObject;
 import com.example.a2024b_integrative_client.model.object.ObjectBoundary;
 import com.example.a2024b_integrative_client.model.user.UserBoundary;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class activity_clubs_screen extends AppCompatActivity implements ObjectCallback {
+public class activity_clubs extends AppCompatActivity implements ObjectCallback {
     UserBoundary userBoundary;
     List<ObjectBoundary> club_objects;
     RecyclerView main_LST_club;
@@ -42,6 +47,7 @@ public class activity_clubs_screen extends AppCompatActivity implements ObjectCa
     ObjectApi objectApi;
     MiniAppCommandApi commandApi;
     UserApi userApi;
+    String jsonUser;
     Gson gson = new Gson();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +56,9 @@ public class activity_clubs_screen extends AppCompatActivity implements ObjectCa
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
         userApi = RetrofitClient.getInstance().create(UserApi.class);
         Intent prev=getIntent();
-        String json= prev.getStringExtra("UserBoundary");
-        if(json!=null){
-            userBoundary=gson.fromJson(json, UserBoundary.class);
+        jsonUser= prev.getStringExtra("UserBoundary");
+        if(jsonUser!=null){
+            userBoundary=gson.fromJson(jsonUser, UserBoundary.class);
         }
         findView();
         NevigationActivity.findNevigationButtens(this,userBoundary);
@@ -83,7 +89,7 @@ public class activity_clubs_screen extends AppCompatActivity implements ObjectCa
                             Log.e("club " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs_screen.this);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_club.setLayoutManager(linearLayoutManager);
                         main_LST_club.setAdapter(objectAdapter);
@@ -113,8 +119,8 @@ public class activity_clubs_screen extends AppCompatActivity implements ObjectCa
                             Log.e("club " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        objectAdapter.setObjectCallback(activity_clubs_screen.this); // הגדרת callback
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs_screen.this);
+                        objectAdapter.setObjectCallback(activity_clubs.this); // הגדרת callback
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_clubs.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_club.setLayoutManager(linearLayoutManager);
                         main_LST_club.setAdapter(objectAdapter);
@@ -133,9 +139,50 @@ public class activity_clubs_screen extends AppCompatActivity implements ObjectCa
 
     @Override
     public void onObjectClick(ObjectBoundary object) {
-        // טיפול באירוע הלחיצה על פריט ב-RecyclerView
-        Log.d("activity_clubs_screen", "Clicked on: " + object.getAlias());
+        TargetObject clubTargetObject = new TargetObject(object.getObjectId());
+        CreatedBy createdBy = new CreatedBy(userBoundary.getUserId());
+        MiniAppCommandBoundary commandBoundary = new MiniAppCommandBoundary("findBenefitsByClub", clubTargetObject, createdBy);
+
+        Log.d("commandBoundary", "Command: " + commandBoundary.getCommand());
+        Log.d("commandBoundary", "Target Object: " + commandBoundary.getTargetObject().getObjectId());
+        Log.d("commandBoundary", "Created By: " + commandBoundary.getInvokedBy().getUserId().getEmail());
+        Log.d("commandBoundary", "Timestamp: " + commandBoundary.getInvocationTimestamp());
+
+        commandApi.invokeCommand("findYourBenefit", false, commandBoundary).enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                Log.e("club ", "command");
+                if (response.isSuccessful()) {
+                    Object responseBody = response.body();
+                    ArrayList<Object> benefit = (ArrayList<Object>) responseBody;
+                    Gson gson = new Gson();
+                    String json = gson.toJson(benefit);
+                    Type type = new TypeToken<ArrayList<ObjectBoundary>>() {}.getType();
+                    ArrayList<ObjectBoundary> benefitList = gson.fromJson(json, type);
+
+                    for (int i = 0; i < benefitList.size(); i++) {
+                        Log.e("benefit  " + i, benefitList.get(i).toString() + "\n");
+                    }
+
+                    Intent intent = new Intent(activity_clubs.this, activity_stores_of_club.class);
+                    intent.putExtra("benefitList", gson.toJson(benefitList));
+                    intent.putExtra("clubName", object.getAlias());
+                    intent.putExtra("UserBoundary", jsonUser);
+                    startActivity(intent);
+
+                    Log.d("API_CALL", "Success: ");
+                } else {
+                    Log.d("API_CALL", "Failed: " + response.code() + ", Error body: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                Log.e("API_CALL", "Error: " + t.getMessage());
+            }
+        });
     }
+
 
     private void findView() {
         welcome_text = findViewById(R.id.welcome_text);

@@ -37,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class activity_main_screen extends AppCompatActivity implements ObjectCallback {
+public class activity_main extends AppCompatActivity implements ObjectCallback {
     List<ObjectBoundary> store_objects;
     RecyclerView main_LST_store;
     TextView welcome_text;
@@ -48,6 +48,7 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
     ObjectApi objectApi;
     MiniAppCommandApi commandApi;
     UserApi userApi;
+    String jsonUser;
     MiniAppCommandBoundary commandBoundary;
     Gson gson = new Gson();
     @Override
@@ -58,9 +59,9 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
         userApi = RetrofitClient.getInstance().create(UserApi.class);
         Intent prev=getIntent();
-        String json= prev.getStringExtra("UserBoundary");
-        if(json!=null){
-            userBoundary=gson.fromJson(json, UserBoundary.class);
+        jsonUser= prev.getStringExtra("UserBoundary");
+        if(jsonUser!=null){
+            userBoundary=gson.fromJson(jsonUser, UserBoundary.class);
         }
         findView();
         NevigationActivity.findNevigationButtens(this,userBoundary);
@@ -93,7 +94,7 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
                             Log.e("store " + i, objectBoundary.get(i).getAlias() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.this);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_store.setLayoutManager(linearLayoutManager);
                         main_LST_store.setAdapter(objectAdapter);
@@ -124,8 +125,8 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
                             Log.e("store created by " + i, objectBoundary.get(i).getCreatedBy() +"\n");
                         }
                         ObjectAdapter objectAdapter = new ObjectAdapter(objectBoundary);
-                        objectAdapter.setObjectCallback(activity_main_screen.this); // הגדרת callback
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main_screen.this);
+                        objectAdapter.setObjectCallback(activity_main.this); // הגדרת callback
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_main.this);
                         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                         main_LST_store.setLayoutManager(linearLayoutManager);
                         main_LST_store.setAdapter(objectAdapter);
@@ -172,8 +173,10 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
                         Log.e("benefit  " + i, benefitList.get(i).toString() + "\n");
                     }
 
-                    Intent intent = new Intent(activity_main_screen.this, activity_benefit_screen.class);
+                    Intent intent = new Intent(activity_main.this, activity_benefit_of_store.class);
                     intent.putExtra("benefitList", gson.toJson(benefitList));
+                    intent.putExtra("storeName", object.getAlias());
+                    intent.putExtra("UserBoundary", jsonUser);
                     startActivity(intent);
 
                     Log.d("API_CALL", "Success: ");
@@ -196,6 +199,6 @@ public class activity_main_screen extends AppCompatActivity implements ObjectCal
         welcome_text = findViewById(R.id.welcome_text);
         search_text = findViewById(R.id.search_text);
         search_button = findViewById(R.id.search_button);
-        main_LST_store = findViewById(R.id.club_recycler_view);
+        main_LST_store = findViewById(R.id.store_recycler_view);
     }
 }
