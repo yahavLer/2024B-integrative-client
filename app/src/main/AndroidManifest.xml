@@ -42,7 +42,7 @@
         <activity android:name=".view.activity_profile" />
         <activity android:name=".view.activity_clubs" />
         <activity android:name=".view.activity_benefit_of_store" />
-        <activity android:name=".view.activity_stores_of_club" />
+        <activity android:name=".view.activity_benefit_of_club" />
 
 
     </application>

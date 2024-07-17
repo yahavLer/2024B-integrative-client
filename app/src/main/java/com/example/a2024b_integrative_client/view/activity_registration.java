@@ -68,14 +68,11 @@ public class activity_registration extends AppCompatActivity {
                         (signup_EDT_username.getText().toString(),
                         signup_EDT_email.getText().toString(),
                         signup_EDT_avatar.getText().toString(),
-                        signup_EDT_phone.getText().toString(),
                         signup_SPN_roles.getSelectedItem().toString(),
-                        signup_SPN_credit_card_company.getSelectedItem().toString(),
                         signup_SPN_club_membership.getSelectedItem().toString());
                 signup_EDT_username.getText().clear();
                 signup_EDT_email.getText().clear();
                 signup_EDT_avatar.getText().clear();
-                signup_EDT_phone.getText().clear();
                 //TODO: clear spinner
             }
         });
@@ -85,20 +82,14 @@ public class activity_registration extends AppCompatActivity {
         signup_EDT_username =findViewById(R.id.signup_EDT_username);
         signup_EDT_email = findViewById(R.id.signup_EDT_email);
         signup_EDT_avatar = findViewById(R.id.signup_EDT_avatar);
-        signup_EDT_phone = findViewById(R.id.signup_EDT_phone);
         signup_SPN_roles = findViewById(R.id.signup_SPN_roles);
-        signup_SPN_credit_card_company = findViewById(R.id.signup_SPN_credit_card_company);
         signup_SPN_club_membership = findViewById(R.id.signup_SPN_club_membership);
         signup_BTN_Register = findViewById(R.id.signup_BTN_Register);
         String[] rolesArray = getResources().getStringArray(R.array.roles);
-        String[] creditCardArray = getResources().getStringArray(R.array.credit_card_companies);
         String[] clubArray = getResources().getStringArray(R.array.clubs_membership);
 
         ArrayAdapter<String> roleAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item,rolesArray);
         signup_SPN_roles.setAdapter(roleAdapter);
-
-        ArrayAdapter<String> creditCardAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item,creditCardArray);
-        signup_SPN_credit_card_company.setAdapter(creditCardAdapter);
 
         ArrayAdapter<String> clubAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item,clubArray);
         signup_SPN_club_membership.setAdapter(clubAdapter);
@@ -117,7 +108,7 @@ public class activity_registration extends AppCompatActivity {
         }
     }
 
-    private void createUser(String username, String email, String avatar, String phone, String role, String card, String club) {
+    private void createUser(String username, String email, String avatar, String role, String club) {
         RoleEnumBoundary roleEnum=convertStringToEnum(role);
         NewUserBoundary newUser = new NewUserBoundary(roleEnum, username, avatar, email);
         mApi.createUser(newUser).enqueue(new Callback<UserBoundary>() {

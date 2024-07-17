@@ -38,7 +38,7 @@ public class activity_profile extends AppCompatActivity {
             EDT_Hello.setText("Hello " + userBoundary.getUsername());
             EDT_username.setText(userBoundary.getUsername());
             EDT_email.setText(userBoundary.getUserId().getEmail());
-            EDT_userId.setText(userBoundary.getUserId().getSuperapp()+" "+ userBoundary.getUserId().getEmail());
+            EDT_userId.setText(userBoundary.getUserId().getSuperapp()+"\n"+ userBoundary.getUserId().getEmail());
             EDT_role.setText(userBoundary.getRole().toString());
             // Load the image using Glide
             Glide.with(this)

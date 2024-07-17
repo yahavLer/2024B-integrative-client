@@ -16,14 +16,8 @@
         <item>UNDETERMINED</item>
     </string-array>
 
-    <string-array name="credit_card_companies">
-        <item>American Express</item>
-        <item>Isracard</item>
-        <item>Max</item>
-        <item>Cal</item>
-        <item>Discount</item>
-    </string-array>
     <string-array name="clubs_membership">
+        <item>your clubs</item>
         <item>Hever</item>
         <item>Teachers Union</item>
         <item>Beatzdaa</item>

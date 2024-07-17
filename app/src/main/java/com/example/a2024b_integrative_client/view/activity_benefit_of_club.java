@@ -24,12 +24,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class activity_stores_of_club extends AppCompatActivity {
-    RecyclerView main_LST_store;
-    TextView title_text;
+public class activity_benefit_of_club extends AppCompatActivity {
+    RecyclerView main_LST_benefit;
+    TextView benefit_text;
     String json;
     String clubName;
-    List<ObjectBoundary> store_objects;
+    List<ObjectBoundary> benefit_objects;
     UserBoundary userBoundary;
     ObjectApi objectApi;
     MiniAppCommandApi commandApi;
@@ -40,7 +40,7 @@ public class activity_stores_of_club extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.store_of_club_screen);
+        setContentView(R.layout.benefit_of_club_screen);
         findView();
         objectApi = RetrofitClient.getInstance().create(ObjectApi.class);
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
@@ -54,28 +54,28 @@ public class activity_stores_of_club extends AppCompatActivity {
             userBoundary = gson.fromJson(jsonUser, UserBoundary.class);
         }
         NevigationActivity.findNevigationButtens(this, userBoundary);
-        title_text.setText("Store of " + clubName);
+        benefit_text.setText("Benefit of " + clubName);
         if (json != null) {
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<ObjectBoundary>>() {
             }.getType();
-            store_objects = gson.fromJson(json, type);
+            benefit_objects = gson.fromJson(json, type);
         } else {
-            Log.e("ActivityStoresOfClubScreen", "No stores list received");
+            Log.e("ActivityStoresOfClubScreen", "No benefits list received");
         }
-        initViewsBenefit(store_objects);
+        initViewsBenefit(benefit_objects);
     }
 
     private void findView() {
-        title_text = findViewById(R.id.store_text);
-        main_LST_store = findViewById(R.id.store_recycler_view);
+        benefit_text = findViewById(R.id.benefit_text);
+        main_LST_benefit = findViewById(R.id.benefit_of_club_recycler_view);
     }
 
     private void initViewsBenefit(List<ObjectBoundary> benefit_objects) {
         ObjectAdapter objectAdapter = new ObjectAdapter(benefit_objects);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_stores_of_club.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_benefit_of_club.this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        main_LST_store.setLayoutManager(linearLayoutManager);
-        main_LST_store.setAdapter(objectAdapter);
+        main_LST_benefit.setLayoutManager(linearLayoutManager);
+        main_LST_benefit.setAdapter(objectAdapter);
     }
 }

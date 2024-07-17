@@ -165,7 +165,7 @@ public class activity_clubs extends AppCompatActivity implements ObjectCallback 
                         Log.e("benefit  " + i, benefitList.get(i).toString() + "\n");
                     }
 
-                    Intent intent = new Intent(activity_clubs.this, activity_stores_of_club.class);
+                    Intent intent = new Intent(activity_clubs.this, activity_benefit_of_club.class);
                     intent.putExtra("benefitList", gson.toJson(benefitList));
                     intent.putExtra("clubName", object.getAlias());
                     intent.putExtra("UserBoundary", jsonUser);

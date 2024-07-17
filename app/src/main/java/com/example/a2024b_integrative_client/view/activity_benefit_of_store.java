@@ -40,7 +40,7 @@ public class activity_benefit_of_store extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.benefit_screen);
+        setContentView(R.layout.benefit_of_store_screen);
         objectApi = RetrofitClient.getInstance().create(ObjectApi.class);
         commandApi = RetrofitClient.getInstance().create(MiniAppCommandApi.class);
         userApi = RetrofitClient.getInstance().create(UserApi.class);

@@ -10,7 +10,7 @@ public class RetrofitClient {
     private static MiniAppCommandApi miniAppCommandApi = null;
     private static Retrofit retrofit = null;
     private static final String BASE_URL = "http://192.168.1.174:8085/";
-//    private static final String BASE_URL = "http://172.20.10.2:8085/";
+ //   private static final String BASE_URL = "http://172.20.10.2:8085/";
 
     private RetrofitClient() {}// Private constructor to prevent instantiation from outside
 
